@@ -1,12 +1,15 @@
 package neriidev.hackathon.exista.service;
 
 import neriidev.hackathon.exista.adapters.customer.CustomerCLient;
+import neriidev.hackathon.exista.adapters.wallet.WalletClient;
 import neriidev.hackathon.exista.domain.Customers;
+import neriidev.hackathon.exista.domain.Wallet;
 import neriidev.hackathon.exista.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +17,8 @@ import java.util.Optional;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+
+
 
     @Autowired
     private CustomerCLient customerCLient;
@@ -44,6 +49,8 @@ public class CustomerService {
         return customerCLient.getCustomerDetailsId(id);
     }
     public List<Customers> getAllCustomers() {
-        return (List<Customers>) customerCLient.getCustomerDetails();
+        return  customerCLient.getCustomerDetails().getBody();
     }
+
+
 }

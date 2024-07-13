@@ -1,11 +1,16 @@
 package neriidev.hackathon.exista.adapters.stores;
 
+import neriidev.hackathon.exista.domain.Store;
+import neriidev.hackathon.exista.domain.Wallet;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @Service
 public class StoreClient {
@@ -24,7 +29,7 @@ public class StoreClient {
         return response;
     }
 
-    public ResponseEntity<String> getStoreDetails() {
+    public ResponseEntity<List<Store>> getStoreDetails() {
         String url = "https://hackathon.vivacn.roxcode.io/api/stores/details";
 
         HttpHeaders headers = new HttpHeaders();
@@ -33,7 +38,7 @@ public class StoreClient {
         HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
 
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+      ResponseEntity<List<Store>> response = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<Store>>() {});
 
         return response;
     }
