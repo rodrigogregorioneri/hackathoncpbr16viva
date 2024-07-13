@@ -33,13 +33,13 @@ public class WalletController {
     ArrayList<Cards> topCards = new ArrayList<>();
 
     String value1 = "R$ "+customerService.getValueTotal().getAmount().toString();
-    String value2 = "$1k";
+    String value2 = "50";
     String value3 = customerService.quantidadedeLojas().getQtdLojas().toString();
     String value4 = customerService.quantidadesCompras().getCompras().toString();
 
 
     topCards.add(new Cards("success", "bi bi-wallet",value1 , "Ganhos Totais"));
-    topCards.add(new Cards("danger", "bi bi-coin", value2, "Lojas menos compras"));
+    topCards.add(new Cards("danger", "bi bi-coin", value2, "Lojas com maiores transações"));
     topCards.add(new Cards("warning", "bi bi-basket3", value3, "Quantidade de Lojas"));
     topCards.add(new Cards("info", "bi bi-bag", value4, "Totais de Vendas"));
 
