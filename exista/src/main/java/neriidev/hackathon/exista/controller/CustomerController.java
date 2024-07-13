@@ -1,37 +1,34 @@
 package neriidev.hackathon.exista.controller;
 
-import neriidev.hackathon.exista.adapters.customer.CustomerCLient;
 import neriidev.hackathon.exista.domain.Customers;
+import neriidev.hackathon.exista.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/clientes")
 public class CustomerController {
 
-    private List<Customers> clientes;
-
     @Autowired
-    CustomerCLient customerCLient;
+    private CustomerService customerService;
 
     @GetMapping
     public ResponseEntity<List<Customers>> getAllClientes() {
-        return ResponseEntity.ok(clientes);
+        return ResponseEntity.ok(customerService.getAllCustomers());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Customers> getClienteById(@PathVariable String id) {
-       return customerCLient.getCustomerDetails(id);
-
+    public ResponseEntity<Customers> getClienteById(@PathVariable Integer id) {
+       return ResponseEntity.ok(customerService.getCustomerById(id).get());
     }
 
     @PostMapping
     public ResponseEntity<Customers> createCliente(@RequestBody Customers newCliente) {
-        clientes.add(newCliente);
-        return ResponseEntity.ok(newCliente);
+        return ResponseEntity.ok(customerService.createCustomer(newCliente));
     }
 
 }

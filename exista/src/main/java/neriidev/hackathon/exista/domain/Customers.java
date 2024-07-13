@@ -1,13 +1,20 @@
 package neriidev.hackathon.exista.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Data;
 
 import java.util.List;
 import java.time.LocalDate;
 
 @Data
+@Entity
 public class Customers {
-        private String id;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer id;
         private String firstName;
         private String lastName;
         private String address;
